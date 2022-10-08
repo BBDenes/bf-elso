@@ -5,9 +5,7 @@ let canPlace = false;
 var array = [];
 var canPut = "blue";
 var deff = "red";
-class Cell{
-    constructor(row, col, )
-}
+
 
 
 function CheckInput() {
@@ -26,31 +24,10 @@ function CheckInput() {
 }
 
 function FillTable(row, col) {
-    table = new Array(row);
-    let startingPosRed = [row/2-1, col/2-1];
-    let startingPosBlue = [row/2-1, col/2];
-    //console.log(startingPosRed);
-    //console.log(startingPosBlue);
-    for (let i = 0; i < col; i++) {
-        table[i] = new Array(row);
-    }
-    t.innerHTML = ""
+    window.array = [];
     for (let i = 0; i < row; i++) {
         window.array.push([]);
         for (let j = 0; j < col; j++){
-            if ((i==startingPosRed[0]&&j==startingPosRed[1]) || (i==startingPosRed[0]+1&&j==startingPosRed[1]+1)) {
-                msg += `<td><span id=${i*col + j} class="red" onmouseover="Check(${i*col + j})" style="height: 30px; width: 30px; background-color: red;border-radius: 50%; display: inline-block;"></span></td>`;
-            } else if((i==startingPosBlue[0]&&j==startingPosBlue[1]) || (i==startingPosBlue[0]+1&&j==startingPosBlue[1]-1)) {
-                msg += `<td><span id=${i*col + j} class="blue" onmouseover="Check(${i*col + j})" style="height: 30px; width: 30px; background-color: blue;border-radius: 50%; display: inline-block;"></span></td>`;
-            }else{
-                msg += `<td><span id=${i*col + j} class="blank" onmouseover="Check(${i*col + j})" style="height: 30px; width: 30px; background-color: grey;border-radius: 50%; display: inline-block;">${i*col+j}</span></td>`;
-            }
-            
-            
-        }
-        msg += `</tr>`;
-        t.innerHTML += msg;
-        //console.log(document.getElementById(3).innerHTML);
             window.array[i].push({color : false, y : i, x : j, isItFree : true, worth : 0, selected : false});
         }
     }
