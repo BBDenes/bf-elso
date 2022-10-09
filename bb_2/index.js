@@ -73,14 +73,8 @@ function FillTable(row, col) {
 }
 function Refresh(row, col){
     t.innerHTML = "";
-    for (let i = 0; i < row; i++) {
-        let msg = ``;
-        msg += `<tr>`
-        for (let j = 0; j < col; j++){
-            msg += `<td><span id=${table[i][j].index}   class="blue" onmouseover="Check(${i}, ${j}, ${i*col + j})" style="height: 30px; width: 30px; background-color: ${table[i][j].color};border-radius: 50%; display: inline-block;"></span></td>`;
-        }
-        msg += `</tr>`;
-        t.innerHTML += msg;
+    for (let i = 0; i < Math.pow(len, 2); i++) {
+       let temp = document.getElementById(i); //tábla újrarajzolás, színek stb...(108.sorhoz)
     }
 }
 
@@ -92,13 +86,25 @@ function Check(r, c, index){
         right: document.getElementById(index + 1),
         bottom: document.getElementById(index + len),
         top: document.getElementById(index - len),
-        topleft: document.getElementById()
+        topleft: document.getElementById(i - (len+1)),
+        topright: document.getElementById(i - (len-1)),
+        botleft: document.getElementById(i + (len-1)),
+        botright: document.getElementById(i + (len+1)),
+        Colors: function(color) {
+            if (this.left.style.backgroundColor == color ||this.right.style.backgroundColor == color || this.top.style.backgroundColor == color || this.bottom.style.backgroundColor == color) {
+                return true;
+            }else if (this.topleft.style.backgroundColor == color || this.topright.style.backgroundColor == color || this.botleft.style.backgroundColor == color || this.botright.style.backgroundColor == color) {
+                return true;
+            }else{
+                return false;
+            }
+        }
     };
     //console.table(table);
     console.log(Cell.ReturnColor(current));
     Refresh(len, len);
     if (player === "red") {
-        if (target.bottom.style.backgroundColor == "blue" || target.top) {
+        if (target.Colors("blue")) {
             
         }
     } else {
