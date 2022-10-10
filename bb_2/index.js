@@ -5,11 +5,12 @@ let len;
 var player = "red";
 
 class Cell{
-    constructor(row, col, index, color, canSelect){
+    constructor(row, col, index, color, border, canSelect){
         this.row = row;
         this.index = index;
         this.col = col;
         this.color = color;
+        this.border = border;
         this.canSelect = canSelect;
     }
     static ReturnColor(x){
@@ -25,6 +26,7 @@ class Cell{
         return x.col;
     }*/
 }
+
 
 function CheckInput() {
     let x = document.getElementById("in").value;
@@ -54,14 +56,14 @@ function FillTable(row, col) {
         for (let j = 0; j < col; j++){
             if ((i == row / 2-1&& j == col / 2-1) || (i == row/2 && j == col/2)) {
                 //msg += `<td><span id=${i*col + j} class="red" onmouseover="Check(${i}, ${j}, ${i*col + j})" style="height: 30px; width: 30px; background-color: red;border-radius: 50%; display: inline-block;"></span></td>`;
-                table[i][j] = new Cell(i, j, (i*col+j),"red");
+                table[i][j] = new Cell(i, j, (i*col+j),"red",);
             } else if((i==row/2-1&&j==col/2) || (i == row/2 && j == col/2-1)) {
                 table[i][j] = new Cell(i, j, (i*col+j),"blue");
             }else{
                 //msg += `<td><span id=${i*col + j} class="blank" onmouseover="Check(${i}, ${j}, ${i*col + j})" style="height: 30px; width: 30px; background-color: grey;border-radius: 50%; display: inline-block;">${i*col+j}</span></td>`;
                 table[i][j] = new Cell(i, j, (i*col+j),"grey");
             }
-            msg += `<td><span id=${table[i][j].index} class="blue" onmouseover="Check(${i}, ${j}, ${i*col + j})" style="height: 30px; width: 30px; background-color: ${table[i][j].color};border-radius: 50%; display: inline-block;"></span></td>`;
+            msg += `<td><span id=${table[i][j].index} class="blue" onmouseover="Check(${i}, ${j}, ${i*col + j})" style="height: 30px; width: 30px; background-color: ${table[i][j].color};border-radius: 50%;border-color: 1px solid grey; display: inline-block;"></span></td>`;
             
             
         }
@@ -72,43 +74,43 @@ function FillTable(row, col) {
 
 }
 function Refresh(row, col){
-    t.innerHTML = "";
-    for (let i = 0; i < Math.pow(len, 2); i++) {
-       let temp = document.getElementById(i); //tábla újrarajzolás, színek stb...(108.sorhoz)
+    //t.innerHTML = "";
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
+            let a = table[i][j].index;
+            let temp = document.getElementById(a).style; //tábla újrarajzolás, színek stb...(108.sorhoz)
+            temp = table[i][j].color;
+            temp.borderColor = table[j][j].border;
+        }
     }
 }
 
 function Check(r, c, index){
     let current = table[r][c];
+    console.log(index)
     let placeAble = [];
     let target = {
-        left: document.getElementById(index - 1),
-        right: document.getElementById(index + 1),
-        bottom: document.getElementById(index + len),
-        top: document.getElementById(index - len),
-        topleft: document.getElementById(i - (len+1)),
-        topright: document.getElementById(i - (len-1)),
-        botleft: document.getElementById(i + (len-1)),
-        botright: document.getElementById(i + (len+1)),
-        Colors: function(color) {
-            if (this.left.style.backgroundColor == color ||this.right.style.backgroundColor == color || this.top.style.backgroundColor == color || this.bottom.style.backgroundColor == color) {
-                return true;
-            }else if (this.topleft.style.backgroundColor == color || this.topright.style.backgroundColor == color || this.botleft.style.backgroundColor == color || this.botright.style.backgroundColor == color) {
-                return true;
-            }else{
-                return false;
-            }
-        }
+        left: current.col - 1,
+        right: parseInt(current.col) + 1,
+        bottom: parseInt(current.row) + 1,
+        top: current.row - 1,
+        topleft: parseInt(index)-len - 1,
+        topright: index - (len-1),
+        botleft: parseInt(index) + (len-1),
+        botright: (parseInt(index) + (parseInt(len)+1)),
     };
-    //console.table(table);
+    console.table(target);
     console.log(Cell.ReturnColor(current));
-    Refresh(len, len);
     if (player === "red") {
-        if (target.Colors("blue")) {
-            
+        if (dosument.getElementById()) {
+            current.border = "red";
+            Refresh(len, len);
         }
     } else {
-        
+        if (target.Colors("red")) {
+            current.style.borderColor = "red";
+            Refresh(len, len);
+        }
     }
     let temp = table[0][2];
     temp.color = "red";
