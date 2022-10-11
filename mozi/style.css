@@ -1,6 +1,7 @@
 body{
     text-align: center;
     margin: 0px;
+    background-color: grey;
 }
 div{
     border: 1px solid black;
@@ -10,18 +11,20 @@ div{
     border-bottom: 2px solid black;
 }
 #wrapper{
-    border:none;
+    /*border:none;*/
     width:initial;
     padding: 10px;
 }
 #menu{
+    background-color: lightgray;
     text-align: left;
     float: left;
-    width: 350px;
+    width: 400px;
 }
 #out{
+    background-color: lightgray;
     overflow: hidden;
     margin-left: 10px;
-    width: 500px;
+    width: auto;
     text-align: center;
 }
