@@ -1,0 +1,27 @@
+body{
+    text-align: center;
+    margin: 0px;
+}
+div{
+    border: 1px solid black;
+}
+#title{
+    border:none;
+    border-bottom: 2px solid black;
+}
+#wrapper{
+    border:none;
+    width:initial;
+    padding: 10px;
+}
+#menu{
+    text-align: left;
+    float: left;
+    width: 350px;
+}
+#out{
+    overflow: hidden;
+    margin-left: 10px;
+    width: 500px;
+    text-align: center;
+}
